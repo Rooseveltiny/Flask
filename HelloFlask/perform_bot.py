@@ -53,8 +53,22 @@ def send_schedule():
 
 
     return 'ok' 
+
+def get_day(message):
+
+    for day in DAYS.keys():
+
+        if day.lower() in message.lower():
+
+            return DAYS[day]
+
+    return 'today'
         
 
 if __name__ == "__main__":
     
-    send_schedule()
+    data = {
+        'object':{'user_id': 1504990,
+        'body':'Что у нас?'}
+        }
+    make_a_respond(data)
