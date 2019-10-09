@@ -90,7 +90,7 @@ def load_schedule_from_site():
 
     links = soup.findAll('a', {'class': 'at_url'})
 
-    link = links[-1]['href']
+    link = links[1]['href']
     
     schedule = requests.get(link)
     out = open("schedule.xls", "wb")
