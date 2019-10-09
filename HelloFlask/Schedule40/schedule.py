@@ -82,9 +82,9 @@ def load_schedule_from_site():
         }
         
     r = requests.get(url="https://s11028.edu35.ru/2013-06-12-15-17-31/raspisanie", headers = headers)
-    # soup = BeautifulSoup(r.content.decode('utf-8'), features = 'lxml')
+    soup = BeautifulSoup(r.content.decode('utf-8'), features = 'lxml')
     
-    soup = BeautifulSoup(html, "lxml")
+    # soup = BeautifulSoup(html, "lxml")
 
 
     links = soup.findAll('a', {'class': 'at_url'})
@@ -93,7 +93,7 @@ def load_schedule_from_site():
     
 
     schedule = requests.get(link)
-    out = open("./shedule.xls", "wb")
+    out = open("schedule.xls", "wb")
 
     out.write(schedule.content)
     out.close()
@@ -113,7 +113,7 @@ def get_schedule(grade):
 
     ###### FOR FORMAT XLS ######
 
-    book = xlrd.open_workbook("./Shedule.xls")
+    book = xlrd.open_workbook("schedule.xls")
     sheet = book.sheet_by_index(0)
     place_of_time = find_col_and_string(sheet, 'Время')
     place_of_objects = find_col_and_string(sheet, grade.lower())
@@ -131,7 +131,8 @@ def get_schedule(grade):
     return get_text(values_of_time, values_of_subjects, values_of_stadiums)
   
 
+if __name__ == '__main__':
 
-print(get_schedule('6г'))
+    print(get_schedule('6г'))
 
 

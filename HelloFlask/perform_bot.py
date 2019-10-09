@@ -1,11 +1,11 @@
 
-from .schedule.pars_schedule import get_schedule
+from schedule.pars_schedule import get_schedule
 import vk
 from flask import Flask, request, json
-from .settings import *
+from settings import *
 import json
-from .WORDS import WORDS, DAYS
-# from .Schedule40.schedule import get_schedule as get_arina_schedule
+from WORDS import WORDS, DAYS
+from Schedule40.schedule import get_schedule as get_arina_schedule
 
 
 def take_care_about_call(req: 'request')->'performin bot action':
@@ -21,51 +21,22 @@ def take_care_about_call(req: 'request')->'performin bot action':
         return make_a_respond(data)
 
 
-def make_a_respond(data):
+def make_a_respond():
 
+    # message = data['object']['body']
 
-    message = data['object']['body']
+    session = vk.Session()
+    api = vk.API(session, v=5.0)
+    user_id = 47811061
 
-    type_of_function = check_type_to_answer(message)
+    ar_schedule = get_arina_schedule('6г')
 
-    if type_of_function == 'Савелий':
+    api.messages.send(access_token=token, user_id=str(
+                    user_id), message=ar_schedule)
 
-        session = vk.Session()
-        api = vk.API(session, v=5.0)
-        user_id = data['object']['user_id']
-
-
-        day = get_day(message)
-
-        schedule = get_schedule(day)  
-
-        api.messages.send(access_token=token, user_id=str(
-                    user_id), message=schedule)
-
-        return 'ok'
+    return 'ok' 
         
 
-### checks wich function need to be used
-def check_type_to_answer(message):
-
-
-    for i in WORDS:
-        
-        if 'Арина'.lower() in message.lower():
-            
-            return 'Арина'
-        
-        elif i.lower() in message.lower():
-
-            return 'Савелий'
-        
-def get_day(message):
-
-    for day in DAYS.keys():
-
-        if day.lower() in message.lower():
-
-            return DAYS[day]
-
-    return 'today'
-
+if __name__ == "__main__":
+    
+    make_a_respond()
