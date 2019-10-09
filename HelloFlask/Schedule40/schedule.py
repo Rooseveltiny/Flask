@@ -3,8 +3,9 @@
 
 from bs4 import BeautifulSoup
 import requests
-# import re
+
 import xlrd
+
 
 ### this module allows to get schedule
 
@@ -82,16 +83,15 @@ def load_schedule_from_site():
         }
         
     r = requests.get(url="https://s11028.edu35.ru/2013-06-12-15-17-31/raspisanie", headers = headers)
-    soup = BeautifulSoup(r.content.decode('utf-8'), features = 'lxml')
-    
-    # soup = BeautifulSoup(html, "lxml")
 
+    # soup = BeautifulSoup(r.content.decode('utf-8'), features = 'lxml')
+    
+    soup = BeautifulSoup(r.content.decode('utf-8'), "html.parser")
 
     links = soup.findAll('a', {'class': 'at_url'})
 
     link = links[-1]['href']
     
-
     schedule = requests.get(link)
     out = open("schedule.xls", "wb")
 
@@ -103,7 +103,7 @@ def get_text(list_one, list_two, list_three):
     result = ''
     for i, value in enumerate(list_one):
 
-        result = result + list_one[i] + ' - '+list_two[i]+ ' - '+str(list_three[i])+ '\n'
+        result = result + list_one[i] + ' | '+list_two[i]+ ' | '+str(list_three[i])+ '\n'
 
     return result
 
