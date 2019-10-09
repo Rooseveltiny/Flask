@@ -1,2 +1,2 @@
 PassengerEnabled On
-PassengerPython /home/r/roosevelt/.local/bin/python3
+PassengerPython ./env/bin/python3
