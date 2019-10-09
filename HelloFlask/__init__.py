@@ -1,8 +1,10 @@
 
-# import sys.path
+# import sys
+
+# sys.path.append('/')
 
 from flask import Flask, render_template, request, redirect, escape, session, copy_current_request_context
-from .perform_bot import take_care_about_call, send_schedule
+from perform_bot import take_care_about_call, send_schedule
 
 
 app = Flask(__name__, template_folder='templates')
