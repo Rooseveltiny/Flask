@@ -19,6 +19,8 @@ def retro():
     
 @app.route('/send_schedule')
 def send_schedule():
+
+    pass
     
     
 
