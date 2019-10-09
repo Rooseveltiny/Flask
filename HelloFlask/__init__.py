@@ -1,5 +1,5 @@
 
-import sys.path
+# import sys.path
 
 from flask import Flask, render_template, request, redirect, escape, session, copy_current_request_context
 from .perform_bot import take_care_about_call, send_schedule
