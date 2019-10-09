@@ -39,4 +39,4 @@ def send_schedule():
 
 if __name__ == "__main__":
     
-    make_a_respond()
+    send_schedule()
