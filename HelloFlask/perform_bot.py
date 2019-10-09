@@ -21,7 +21,7 @@ def take_care_about_call(req: 'request')->'performin bot action':
         return make_a_respond(data)
 
 
-def make_a_respond():
+def send_schedule():
 
     # message = data['object']['body']
 
