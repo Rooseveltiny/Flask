@@ -1,7 +1,9 @@
 
-# import sys
+import os
+import sys
 
-# sys.path.append('/')
+file_dir = os.path.dirname(__file__)
+sys.path.append(file_dir)
 
 from flask import Flask, render_template, request, redirect, escape, session, copy_current_request_context
 from perform_bot import take_care_about_call, send_schedule
