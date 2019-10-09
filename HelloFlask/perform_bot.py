@@ -4,7 +4,7 @@ import vk
 from flask import Flask, request, json
 from settings import *
 import json
-from WORDS import WORDS, DAYS
+from WORDS import WORDS, DAYS, USERS_TO_SEND
 from Schedule40.schedule import get_schedule as get_arina_schedule
 
 
@@ -23,16 +23,15 @@ def take_care_about_call(req: 'request')->'performin bot action':
 
 def send_schedule():
 
-    # message = data['object']['body']
-
     session = vk.Session()
     api = vk.API(session, v=5.0)
-    user_id = 47811061
 
     ar_schedule = get_arina_schedule('6г')
 
-    api.messages.send(access_token=token, user_id=str(
+    for user_id in USERS_TO_SEND:
+        api.messages.send(access_token=token, user_id=str(
                     user_id), message=ar_schedule)
+
 
     return 'ok' 
         
